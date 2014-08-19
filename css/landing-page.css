@@ -31,8 +31,9 @@ h6 {
     padding-bottom: 50px;
     text-align: center;
     color: #f8f8f8;
-    background: url(../img/intro-bg.jpg) no-repeat center center;
+    background: url(../img/newBanner2.jpg) ;
     background-size: cover;
+
 }
 
 .intro-message {
@@ -44,7 +45,7 @@ h6 {
 .intro-message > h1 {
     margin: 0;
     text-shadow: 2px 2px 3px rgba(0,0,0,0.6);
-    font-size: 5em;
+    font-size: 7em;
 }
 
 .intro-divider {
@@ -55,6 +56,7 @@ h6 {
 
 .intro-message > h3 {
     text-shadow: 2px 2px 3px rgba(0,0,0,0.6);
+    font-size: 2.2em;
 }
 
 @media(max-width:767px) {
@@ -83,7 +85,7 @@ h6 {
 
 .network-name {
     text-transform: uppercase;
-    font-size: 14px;
+    font-size: 18px;
     font-weight: 400;
     letter-spacing: 2px;
 }
