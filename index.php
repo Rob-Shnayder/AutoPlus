@@ -12,8 +12,8 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="intro-message">
-                        <h1>Lender</h1>
-                        <h3>Money Made Easy.</h3>
+                        <h1>Auto+</h1>
+                        <h3>Innovative Automotive Management.</h3>
                         <hr class="intro-divider">
                         <ul class="list-inline intro-social-buttons">
                             <li>
@@ -66,18 +66,6 @@
                         <li>
                             <a href="#home">Home</a>
                         </li>
-                        <li class="footer-menu-divider">&sdot;</li>
-                        <li>
-                            <a href="#about">About</a>
-                        </li>
-                        <li class="footer-menu-divider">&sdot;</li>
-                        <li>
-                            <a href="#services">Services</a>
-                        </li>
-                        <li class="footer-menu-divider">&sdot;</li>
-                        <li>
-                            <a href="#contact">Contact</a>
-                        </li>
                     </ul>
                     <p class="copyright text-muted small">Robert Shnayder. COP4710</p>
                 </div>
@@ -95,12 +83,13 @@
 
 
 <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="purchaseLabel" aria-hidden="true">       
-<div class="modal-body center" style="margin-left: 18%; width: 70%; position: relative; top:-10%">                
+<div class="modal-body center" style="margin-left: 14%; width: 70%; position: relative; top:5%">                
         <div class="container">    
         <div id="loginbox" style="margin-top:50px;" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">                    
             <div class="panel" >
                     <div class="panel-heading">
-                        <h3>Login</h3>                        
+                        <h3>Login</h3>
+                        
                     </div>     
 
                     <div class="panel-body" >
@@ -133,7 +122,7 @@
                                 <div style="margin-top:10px" class="form-group">
                                     <!-- Button -->
 
-                                    <div class="col-sm-12 controls">
+                                   <div class="col-md-offset-3 col-md-9">
                                       <input class="color green styled-button-1" type="submit" value="Login" id="login"> 
                                       <div class="divider"/></div>
                                  <button type="button" class="nav styled-button-1" data-dismiss="modal">Cancel</button>                           
@@ -166,7 +155,7 @@
                             <div style="float:right; font-size: 85%; position: relative; top:-10px"><a id="signinlink" href="#" onclick="$('#signupbox').hide(); $('#loginbox').show()">Sign In</a></div>
                         </div>  
                         <div class="panel-body" >
-                            <form id="signupform" class="form-horizontal" role="form">
+                            <form accept-charset="UTF-8" id="signupform" class="form-horizontal" role="form" method="post" action="UserManagement/register.php" >
                                 
                                 <div id="signupalert" style="display:none" class="alert alert-danger">
                                     <p>Error:</p>
@@ -176,42 +165,41 @@
                                 
                                   
                                 <div class="form-group">
-                                    <label for="email" class="col-md-3 control-label">Email</label>
+                                    <label for="username" class="col-md-3 control-label">Username</label>
                                     <div class="col-md-9">
-                                        <input type="text" class="form-control" name="email" placeholder="Email Address">
+                                        <input type="text" class="form-control" name="username" placeholder="Username">
                                     </div>
                                 </div>
                                     
+                                <div class="form-group">
+                                    <label for="password" class="col-md-3 control-label">Password</label>
+                                    <div class="col-md-9">
+                                        <input type="password" class="form-control" name="password" placeholder="Password">
+                                    </div>
+                                </div>
                                 <div class="form-group">
                                     <label for="firstname" class="col-md-3 control-label">First Name</label>
                                     <div class="col-md-9">
                                         <input type="text" class="form-control" name="firstname" placeholder="First Name">
                                     </div>
                                 </div>
-                                <div class="form-group">
+                                 <div class="form-group">
                                     <label for="lastname" class="col-md-3 control-label">Last Name</label>
                                     <div class="col-md-9">
                                         <input type="text" class="form-control" name="lastname" placeholder="Last Name">
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label for="password" class="col-md-3 control-label">Password</label>
+                                    <label for="email" class="col-md-3 control-label">Email</label>
                                     <div class="col-md-9">
-                                        <input type="password" class="form-control" name="passwd" placeholder="Password">
+                                        <input type="text" class="form-control" name="email" placeholder="Email Address">
                                     </div>
-                                </div>
-                                    
-                                <div class="form-group">
-                                    <label for="icode" class="col-md-3 control-label">Invitation Code</label>
-                                    <div class="col-md-9">
-                                        <input type="text" class="form-control" name="icode" placeholder="">
-                                    </div>
-                                </div>
+                                </div> 
 
                                 <div class="form-group">
                                     <!-- Button -->                                        
-                                    <div class="col-md-offset-3 col-md-9">
-                                        <button id="btn-signup" type="button" class="color green styled-button-1"><i class="icon-hand-right"></i> &nbsp Sign Up</button>         
+                                    <div class="col-md-offset-4 col-md-9">
+                                        <button id="btn-signup" type="submit" class="color green styled-button-1"><i class="icon-hand-right"></i> &nbsp Sign Up</button>         
                                                                     
                                     </div>
                                 </div>
