@@ -24,14 +24,20 @@ $Query1="call RegisterUser('$username', '$password', '$firstname','$email', '$la
 $res = $con->query("$Query1");
 if($res)
 {
-  echo $res;
+  session_start();
+    $_SESSION['loggedin'] = true;
+    $_SESSION['username'] = $username;
+    $_SESSION['firstname'] = $firstname;
+
+   mysql_close($con);
+   header( 'Location: ../Dashboard.php');
 }
 else
 {
   echo "nothing";
 }
 
- //mysqli_close($con);
+
 
 
 ?>

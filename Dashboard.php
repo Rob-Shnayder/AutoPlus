@@ -69,50 +69,77 @@
           <div class="col-md-6 column well" style="margin: 0% 3%"  >
             <form role="form" class="form-horizontal" method="post" action="matches/insert_newMatch.php" parsley-validate >
               <div class="form-group">
-                <label for="zipInput" class="col-md-3 control-label">
-                  <font color="FA7147">
+                <label for="makeInput" class="col-md-3 control-label">                 
                     <div class="newgameheight">
-                      Max Players
-                    </div>
-                  </font>
+                      Manufacture
+                    </div>                 
                 </label>  
                 <div class="col-md-9">
-                 <input type="digits" class="form-control" name="maxPlayers" autofocus parsley-required="true" parsley-minlength="1" parsley-maxlength="2" placeholder="Maximum Players">
+                 <input type="text" class="form-control" name="maxPlayers" autofocus parsley-required="true" parsley-minlength="1" parsley-maxlength="2" placeholder="Manufacture">
                </div>
              </div>
 
              <div class="form-group">
-               <label for="locationInput" class="col-md-3 control-label">
-                <font color="FA7147">
+               <label for="locationInput" class="col-md-3 control-label">               
                   <div class="newgametext">
-                    Location
-                  </div>
-                </font>
+                    Model
+                  </div>             
               </label>
               <div class="col-md-9">
-                <input type="text" class="form-control" name="location" parsley-required="true" id="exampleInputPassword1" placeholder="Location" />
+                <input type="text" class="form-control" name="location" parsley-required="true" id="exampleInputPassword1" placeholder="Model" />
+              </div>
+            </div>
+
+             <div class="form-group">
+               <label for="locationInput" class="col-md-3 control-label">               
+                  <div class="newgametext">
+                    VIN Number
+                  </div>             
+              </label>
+              <div class="col-md-9">
+                <input type="text" class="form-control" name="location" parsley-required="true" id="exampleInputPassword1" placeholder="VIN Number" />
               </div>
             </div>
 
             <div class="form-group">
-              <label for="zipInput" class="col-md-3 control-label">
-                <font color="FA7147">
+              <label for="zipInput" class="col-md-3 control-label">               
                   <div class="newgametext">
-                    Zip
-                  </div>
-                </font>
+                    Year
+                  </div>              
               </label>  
               <div class="col-md-9">
-               <input type="digits" class="form-control" name="zip" parsley-required="true" parsley-minlength="5" parsley-maxlength="5" placeholder="Zip Code">
+               <input type="digits" class="form-control" name="zip" parsley-required="true" parsley-minlength="5" parsley-maxlength="5" placeholder="Year">
              </div>
            </div>
+
+             <div class="form-group">
+               <label for="locationInput" class="col-md-3 control-label">               
+                  <div class="newgametext">
+                    Color
+                  </div>             
+              </label>
+              <div class="col-md-9">
+                <input type="text" class="form-control" name="Color" parsley-required="true" id="exampleInputPassword1" placeholder="Color" />
+              </div>
+            </div>
+
+              <div class="form-group">
+               <label for="locationInput" class="col-md-3 control-label">               
+                  <div class="newgametext">
+                   Price
+                  </div>             
+              </label>
+              <div class="col-md-9">
+                <input type="digits" class="form-control" name="Color" parsley-required="true" id="exampleInputPassword1" placeholder="Price" />
+              </div>
+            </div>
 
 
            <center>
             <div class="form-group">
               <div style="margin: 2% 0%" class="form-group">
                 <div class="col-sm-12 controls">                                       
-                 <input class="color green styled-button-1" type="submit" value="Lets Play!"> 
+                 <input class="color green styled-button-1" type="submit" value="Continue"> 
                </div>
              </div>
            </div>           

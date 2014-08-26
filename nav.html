@@ -13,9 +13,27 @@
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav navbar-right">
-                    <li>                       
-                         <a data-toggle="modal" href="#loginModal">Login</a>    
-                    </li>
+                    <?php 
+                        session_start();
+                        if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true) 
+                        {
+                            echo "<li>";
+                            echo "<div  class=\"btn-group padded\">";
+                            echo "<button type=\"button\" data-toggle=\"dropdown\"> " . $_SESSION['username'] . " <span class=\"caret\"</span></button>";
+                            echo "<ul class=\"dropdown-menu\">";         
+                            echo "<li><a href=\"Dashboard.php\"><i class=\"glyphicon glyphicon-cog\"></i> Dashboard </a></li>";
+                            echo "<li class=\"divider\">";
+                            echo "<li><a href=\"userMGMT/logout.php\"><i class=\"glyphicon glyphicon-off\"></i> Log out</a></li>";
+                            echo "</ul>";
+                            echo "</div>";
+                            echo "</li>";
+                        } 
+                        else 
+                        {
+                            echo "<li><a href=\"#loginModal\" data-toggle=\"modal\">Login</a></li>";
+                        }
+                        ?>
+
 
                 </ul>
             </div>
