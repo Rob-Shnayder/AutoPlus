@@ -1,8 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
 
+
+
 <?php include 'head.html' ?>
 <?php include 'nav.html' ?>
+
+<script src="LoginFunctionality.js"></script>
 
     <!-- Header -->
     <div class="intro-header">
@@ -95,7 +99,7 @@
 
                         <div style="display:none" id="login-alert" class="alert alert-danger col-sm-12"></div>
                             
-                        <form id="loginform" class="form-horizontal" role="form">
+                        <form id="loginform" class="form-horizontal" role="form" method="post" action="./" parsley-validate>
                                     
                             <div style="margin-bottom: 25px" class="input-group">
                                         <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
