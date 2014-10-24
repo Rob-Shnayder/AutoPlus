@@ -21,7 +21,7 @@ jQuery(document).ready(function(){
 
             if(html.trim()=='1')    
             {                                             
-              window.location="dashboard.php";                    
+              window.location="dashboard.php#dashboard";                    
             }    
             else   
             {

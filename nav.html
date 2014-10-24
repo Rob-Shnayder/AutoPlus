@@ -19,18 +19,24 @@
                         {
                             echo "<li>";
                             echo "<div  class=\"btn-group padded\">";
-                            echo "<button type=\"button\" data-toggle=\"dropdown\"> " . $_SESSION['username'] . " <span class=\"caret\"</span></button>";
+                            echo "<button class=\"btn btn-default btn-lg\" style=\"padding: 6px 20px; top: 4px; font-weight: 700; font-size: 1.2em;\" type=\"button\" data-toggle=\"dropdown\"> " . $_SESSION['username'] . " <span class=\"caret\"</span></button>";
                             echo "<ul class=\"dropdown-menu\">";         
-                            echo "<li><a href=\"Dashboard.php\"><i class=\"glyphicon glyphicon-cog\"></i> Dashboard </a></li>";
+                            echo "<li><a href=\"Dashboard.php#dashboard\"><i class=\"glyphicon glyphicon-cog\"></i> Dashboard </a></li>";
                             echo "<li class=\"divider\">";
-                            echo "<li><a href=\"userMGMT/logout.php\"><i class=\"glyphicon glyphicon-off\"></i> Log out</a></li>";
+                            echo "<li><a href=\"UserManagement/Logout.php\"><i class=\"glyphicon glyphicon-off\"></i> Logout</a></li>";
                             echo "</ul>";
                             echo "</div>";
                             echo "</li>";
                         } 
                         else 
                         {
-                            echo "<li><a href=\"#loginModal\" data-toggle=\"modal\">Login</a></li>";
+                            
+
+                            echo "<li>";
+                            echo "<div  class=\"btn-group padded\">";
+                            echo "<button class=\"btn btn-default btn-lg\" style=\"padding: 6px 20px; top: 4px; font-weight: 700; font-size: 1.2em;\" type=\"button\" data-toggle=\"modal\" data-target=\"#loginModal\">Sign In</button>";                            
+                            echo "</div>";
+                            echo "</li>";
                         }
                         ?>
 
@@ -41,3 +47,4 @@
         </div>
         <!-- /.container -->
     </nav>
+

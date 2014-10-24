@@ -19,12 +19,20 @@
                         <h1>Auto+</h1>
                         <h3>Innovative Automotive Management.</h3>
                         <hr class="intro-divider">
-                        <ul class="list-inline intro-social-buttons">
-                            <li>
-                                <a data-toggle="modal" href="#loginModal" class="btn btn-default btn-lg"><span class="network-name">Login</span></a>                             
-    
-                            </li>                           
-                        </ul>
+                        <?php 
+
+                        echo "<ul class\"list-inline intro-social-buttons\">";
+                        if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true) 
+                        {                            
+                            echo "<a href=\"dashboard.php#dashboard\" class=\"btn btn-default btn-lg\"><span class=\"network-name\">Dashboard</span></a>";   
+                        } 
+                        else 
+                        {
+                            echo "<a href=\"#loginModal\" data-toggle=\"modal\" class=\"btn btn-default btn-lg\"><span class=\"network-name\">Login </span></a>";
+                        }
+                        echo "</ul>";
+                        ?>                       
+                        
                     </div>
                 </div>
             </div>
@@ -70,7 +78,7 @@
                             <a href="#home">Home</a>
                         </li>
                     </ul>
-                    <p class="copyright text-muted small">Robert Shnayder. COP4710</p>
+                    <p class="copyright text-muted small">Robert Shnayder. Taylor Brockhoeft.</p>
                 </div>
             </div>
         </div>

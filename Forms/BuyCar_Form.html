@@ -1,0 +1,220 @@
+<script type="text/javascript">
+function showDiv() 
+{
+  if ( ($('#vin').parsley('validate')) && ($('#year').parsley('validate'))
+    && ($('#color').parsley('validate')) && ($('#price').parsley('validate')))
+  {
+    document.getElementById("Form2").style.display = "block";
+    $('#model').parsley( 'data-parsley-ui-enabled' );
+  }
+
+}
+</script>
+
+
+<h1>Buy Car</h1>   
+
+
+
+<div class="container">
+ <div class="row clearfix"> 
+
+  <form role="form" class="form-horizontal" method="post" id="carForm" action="UserManagement/BuyCar.php" parsley-validate >
+    <div class="col-md-5 column well" style="margin-left: 3%; margin-right: 5%; display:block;" id="Form1" >    
+
+      <div class="form-group">
+        <label for="manufacture" class="col-md-3 control-label">                 
+          <div>
+            Manufacture
+          </div>                 
+        </label>  
+        <div class="col-md-9">
+
+          <?php          
+          require_once 'UserManagement/sqlConfig.php';
+
+
+      $Query1="SELECT title FROM realcarmakers";
+      $res = $con->query("$Query1");
+      echo "<select class=\"form-control\"name=\"manufactureSelect\" onchange=\"reload(this.form)\"><option value=\"\">Manufacture</option>";
+      while($row = mysqli_fetch_array($res))
+      {
+        echo("</option><option value=". $row['title'] . ">". $row['title'] ."</option>");
+      }
+      echo "</select>";
+
+
+      echo " </div>\n"; 
+      echo "</div>\n"; 
+      echo "\n"; 
+      echo "\n"; 
+      echo "\n"; 
+      echo "<div class=\"form-group\">\n"; 
+      echo "<label for=\"model\" class=\"col-md-3 control-label\">               \n"; 
+      echo "<div class=\"newgametext\">\n"; 
+      echo "Model\n"; 
+      echo "</div>             \n"; 
+      echo "</label>\n"; 
+      echo "<div class=\"col-md-9\">\n"; 
+
+      $Query2="call GetCarModels('Ford')";
+      $res2 = $con->query("$Query2");
+      echo "<select class=\"form-control\"name=\"models\"><option value=\"\">Model</option>";
+      while($row = mysqli_fetch_array($res2))
+      {
+        echo("</option><option value=". $row['title'] . ">". $row['title'] ."</option>");
+      }
+      echo "</select>";
+      ?>
+
+    </div>
+  </div>
+
+  <div class="form-group">
+   <label for="vinNumber" class="col-md-3 control-label">               
+    <div class="newgametext">
+      VIN Number
+    </div>             
+  </label>
+  <div class="col-md-9">
+    <input type="text" id="vin" class="form-control" name="vinNumber" parsley-required="true"  placeholder="VIN Number" />
+  </div>
+</div>
+
+<div class="form-group">
+  <label for="year" class="col-md-3 control-label">               
+    <div class="newgametext">
+      Year
+    </div>              
+  </label>  
+  <div class="col-md-9">
+   <input type="digits" id="year" class="form-control" name="year" parsley-required="true" parsley-minlength="4" parsley-maxlength="4" placeholder="Year">
+ </div>
+</div>
+
+<div class="form-group">
+ <label for="color" class="col-md-3 control-label">               
+  <div class="newgametext">
+    Color
+  </div>             
+</label>
+<div class="col-md-9">
+  <input type="text" id="color" class="form-control" name="color" parsley-required="true" placeholder="Color" />
+</div>
+</div>
+
+<div class="form-group">
+ <label for="price" class="col-md-3 control-label">               
+  <div class="newgametext">
+   Price
+ </div>             
+</label>
+<div class="col-md-9">
+  <input type="digits" id="price" class="form-control" name="price" parsley-required="true" placeholder="Price" />
+</div>
+</div>
+
+
+<div style="margin: 8% 30%" class="form-group">
+  <div class="col-sm-12 controls">                                       
+   <input class="color green styled-button-1" type="button" onclick="showDiv()" value="Continue"> 
+ </div>
+</div>
+
+</div>
+
+
+<div class="col-md-5 column well" style="display:none" id="Form2"> 
+  <div class="form-group">
+    <label for="firstName" class="col-md-3 control-label">                 
+      <div class="newgameheight">
+        First Name
+      </div>                 
+    </label>  
+    <div class="col-md-9">
+     <input type="text" class="form-control" name="firstName" autofocus parsley-required="true" placeholder="First Name">
+   </div>
+ </div>
+
+ <div class="form-group">
+   <label for="lastName" class="col-md-3 control-label">               
+    <div class="newgametext">
+      Last Name
+    </div>             
+  </label>
+  <div class="col-md-9">
+    <input type="text" class="form-control" name="lastName" parsley-required="true" placeholder="Last Name" />
+  </div>
+</div>
+
+<div class="form-group">
+ <label for="phone" class="col-md-3 control-label">               
+  <div class="newgametext">
+    Phone
+  </div>             
+</label>
+<div class="col-md-9">
+  <input type="digits" class="form-control" name="phone" parsley-required="true" id="phone" parsley-maxlength="10" placeholder="Phone" />
+</div>
+</div>
+
+<div class="form-group">
+  <label for="Email" class="col-md-3 control-label">               
+    <div class="newgametext">
+      Email
+    </div>              
+  </label>  
+  <div class="col-md-9">
+   <input type="email" class="form-control" name="email" parsley-required="true" placeholder="Email">
+ </div>
+</div>
+
+<div class="form-group">
+ <label for="address" class="col-md-3 control-label">               
+  <div class="newgametext">
+    Address
+  </div>             
+</label>
+<div class="col-md-9">
+  <input type="text" class="form-control" name="address" parsley-required="true" id="exampleInputPassword1" placeholder="Address" />
+</div>
+</div>
+
+<div class="form-group">
+ <label for="state" class="col-md-3 control-label">               
+  <div class="newgametext">
+   State
+ </div>             
+</label>
+<div class="col-md-9">
+  <input type="text" class="form-control" name="state" parsley-required="true" id="exampleInputPassword1" placeholder="State" parsley-maxlength="2" />
+</div>
+</div>
+
+<div class="form-group">
+ <label for="zip" class="col-md-3 control-label">               
+  <div class="newgametext">
+   Zip
+ </div>             
+</label>
+<div class="col-md-9">
+  <input type="digits" class="form-control" name="zip" parsley-required="true" placeholder="Zip"  parsley-maxlength="5"/>
+</div>
+</div>
+
+<div style="margin: 8% 30%" class="form-group">
+  <div class="col-sm-12 controls">                                       
+   <input class="color green styled-button-1" type="submit" value="Submit"> 
+ </div>
+</div>
+
+</form>
+
+
+
+
+</div>
+<center>
+
+</center>
+</div>
