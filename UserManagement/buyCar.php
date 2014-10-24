@@ -9,8 +9,8 @@ $color =  $_POST['color'];
 $price =  $_POST['price'];
 
 
-$firstName =  $_POST['firstname'];
-$lastName =  $_POST['lastname'];
+$firstname =  $_POST['firstname'];
+$lastname =  $_POST['lastname'];
 $phone = $_POST['phone'];
 $email = $_POST['email'];
 $address = $_POST['address'];
@@ -20,13 +20,13 @@ $zip = $_POST['zip'];
 
 
 
-$Query1="call InsertCustomer('$firstname', '$lastname', '$phone','$email', '$state', '$zip')";
+$Query1="call InsertCustomer('$firstname', '$lastname', '$phone','$email', '$address', '$state', '$zip')";
 $res = $con->query("$Query1");
 if($res)
 {
 
 	$Query2="call InsertCar('$manufacture', '$model', '$vinNum', '$year', '$color', ' ')";
-	$res2 = $con->query("$Query1");
+	$res2 = $con->query("$Query2");
 
 	if($res2) {
 		  mysql_close($con);
@@ -40,6 +40,7 @@ if($res)
 else
 {
   echo "Error occured in InsertCustomer";
+  echo mysqli_errno($con);
 }
 
 
