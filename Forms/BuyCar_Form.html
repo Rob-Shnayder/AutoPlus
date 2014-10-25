@@ -1,6 +1,5 @@
 <script type="text/javascript">
-function showDiv() 
-{
+function showDiv()  {
   if ( ($('#vin').parsley('validate')) && ($('#year').parsley('validate'))
     && ($('#color').parsley('validate')) && ($('#price').parsley('validate')))
   {
@@ -9,6 +8,22 @@ function showDiv()
   }
 
 }
+
+
+function getMakeValue(){
+          var e = document.getElementById("manufacture");
+          var strMaker = e.options[e.selectedIndex].value;
+                 
+              $.ajax({
+                    type:"post",
+                    url:"UserManagement/DynamicDropDown.php",
+                    data:"make="+strMaker,
+                    dataType: 'html',
+                        success:function(data){
+                         $('#model').html(data);                     
+                    }
+                 });
+            }
 </script>
 
 
@@ -36,7 +51,7 @@ function showDiv()
 
       $Query1="SELECT title FROM realcarmakers";
       $res = $con->query("$Query1");
-      echo "<select class=\"form-control\"name=\"manufacture\" onchange=\"reload(this.form)\"><option value=\"\">Manufacture</option>";
+      echo "<select class=\"form-control\"name=\"manufacture\" onchange=\"getMakeValue()\" id=\"manufacture\" ><option value=\"\">Manufacture</option>";
       while($row = mysqli_fetch_array($res))
       {
         echo("</option><option value=". $row['title'] . ">". $row['title'] ."</option>");
@@ -56,14 +71,9 @@ function showDiv()
       echo "</div>             \n"; 
       echo "</label>\n"; 
       echo "<div class=\"col-md-9\">\n"; 
+    
+      echo "<select class=\"form-control\" name=\"model\" id=\"model\"><option value=\"\">Model</option>";
 
-      $Query2="call GetCarModels('Ford')";
-      $res2 = $con->query("$Query2");
-      echo "<select class=\"form-control\"name=\"model\"><option value=\"\">Model</option>";
-      while($row = mysqli_fetch_array($res2))
-      {
-        echo("</option><option value=". $row['title'] . ">". $row['title'] ."</option>");
-      }
       echo "</select>";
       ?>
 

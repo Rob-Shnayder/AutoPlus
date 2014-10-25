@@ -1,0 +1,21 @@
+<?php
+require_once 'sqlConfig.php';
+
+$getMake = $_POST['make'];
+
+$Query1="call GetModelsForDropDown('$getMake')";
+$res = $con->query("$Query1");
+while($row = mysqli_fetch_array($res))
+{
+	 echo("</option><option value=". $row['title'] . ">". $row['title'] ."</option>");
+}
+else
+{
+  echo "Error occured in gathering models";
+  echo mysqli_errno($con);
+}
+
+
+
+
+?>
