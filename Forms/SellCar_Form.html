@@ -10,13 +10,13 @@ function showDiv()  {
 }
 
 
-function getMakeValue(){
+function getMakerValue(){
+          
           var e = document.getElementById("manufacture");
-          var strMaker = e.options[e.selectedIndex].value;
-                 
+          var strMaker = e.options[e.selectedIndex].value;        
               $.ajax({
                     type:"post",
-                    url:"UserManagement/DynamicDropDown.php",
+                    url:"UserManagement/SellCar_GetModels.php",
                     data:"make="+strMaker,
                     dataType: 'html',
                         success:function(data){
@@ -24,10 +24,26 @@ function getMakeValue(){
                     }
                  });
             }
+
+
+function getModelValue(){
+          
+          var e = document.getElementById("model");
+          var strMaker = e.options[e.selectedIndex].value;        
+              $.ajax({
+                    type:"post",
+                    url:"UserManagement/SellCar_GetVin.php",
+                    data:"model="+strMaker,
+                    dataType: 'html',
+                        success:function(data){
+                         $('#VIN').html(data);                     
+                    }
+                 });
+            }            
 </script>
 
 
-<h1>Buy Car</h1>   
+<h1>Sell Car</h1>   
 
 
 
@@ -36,6 +52,9 @@ function getMakeValue(){
 
   <form role="form" class="form-horizontal" method="post" id="carForm" action="UserManagement/BuyCar.php" parsley-validate >
     <div class="col-md-5 column well" style="margin-left: 3%; margin-right: 5%; display:block;" id="Form1" >    
+      <center>
+      <h4>Please choose a vehicle from inventory</h4> 
+    </center>
 
       <div class="form-group">
         <label for="manufacture" class="col-md-3 control-label">                 
@@ -44,21 +63,24 @@ function getMakeValue(){
           </div>                 
         </label>  
         <div class="col-md-9">
+      
+      <?php       
 
-          <?php          
-          require_once 'UserManagement/sqlConfig.php';
+      //BEGIN MAKE FIELD   
+      require_once 'UserManagement/sqlConfig.php';
 
-
-      $Query1="SELECT title FROM realcarmakers";
+      $Query1="call GetInventoryMakers()";
       $res = $con->query("$Query1");
-      echo "<select class=\"form-control\"name=\"manufacture\" onchange=\"getMakeValue()\" id=\"manufacture\" ><option value=\"\">Manufacture</option>";
+      echo "<select class=\"form-control\"name=\"manufacture\" onchange=\"getMakerValue()\" id=\"manufacture\" ><option value=\"\">Manufacture</option>";
       while($row = mysqli_fetch_array($res))
       {
-        echo("</option><option value=". $row['title'] . ">". $row['title'] ."</option>");
+        echo("</option><option value=". $row['Make'] . ">". $row['Make'] ."</option>");
       }
       echo "</select>";
+      //END MAKE FIELD
 
 
+      //BEGIN MODEL FIELD
       echo " </div>\n"; 
       echo "</div>\n"; 
       echo "\n"; 
@@ -70,27 +92,30 @@ function getMakeValue(){
       echo "Model\n"; 
       echo "</div>             \n"; 
       echo "</label>\n"; 
+      echo "<div class=\"col-md-9\">\n";     
+      echo "<select class=\"form-control\" name=\"model\" onchange=\"getModelValue()\" id=\"model\"><option value=\"\">Model</option>";
+      echo "</select>";      
+      //END MODEL FIELD
+
+      //BEGIN VIN FIELD
+      echo "</div>\n"; 
+      echo "</div>\n"; 
+      echo "\n"; 
+      echo "<div class=\"form-group\">\n"; 
+      echo "<label for=\"vinNumber\" class=\"col-md-3 control-label\">               \n"; 
+      echo "<div class=\"newgametext\">\n"; 
+      echo "VIN Number\n"; 
+      echo "</div>             \n"; 
+      echo "</label>\n"; 
       echo "<div class=\"col-md-9\">\n"; 
-    
-      echo "<select class=\"form-control\" name=\"model\" id=\"model\"><option value=\"\">Model</option>";
+      echo "<select class=\"form-control\" name=\"VIN\" id=\"VIN\"><option value=\"\">VIN Number</option>";
+      echo "</select>"; 
+      echo "</div>\n";
+      echo "</div>\n";
 
-      echo "</select>";
-      ?>
+      //END VIN FIELD
 
-    </div>
-  </div>
-
-  <div class="form-group">
-   <label for="vinNumber" class="col-md-3 control-label">               
-    <div class="newgametext">
-      VIN Number
-    </div>             
-  </label>
-  <div class="col-md-9">
-    <input type="text" id="vin" class="form-control" name="vinNumber" parsley-required="true" parsley-minlength="17" parsley-maxlength="17"  placeholder="VIN Number" />
-  </div>
-</div>
-
+?>
 <div class="form-group">
   <label for="year" class="col-md-3 control-label">               
     <div class="newgametext">
@@ -224,6 +249,5 @@ function getMakeValue(){
 
 
 </div>
-
 </div>
 </div>

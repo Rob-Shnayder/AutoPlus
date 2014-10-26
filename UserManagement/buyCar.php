@@ -25,7 +25,7 @@ $res = $con->query("$Query1");
 if($res)
 {
 
-	$Query2="call InsertCar('$manufacture', '$model', '$vinNum', '$year', '$color', ' ')";
+	$Query2="call InsertCar('$manufacture', '$model', '$vinNum', '$year', '$color')";
 	$res2 = $con->query("$Query2");
 
 	if($res2) {
