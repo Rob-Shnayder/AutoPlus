@@ -49,11 +49,21 @@ function getCarDetails(){
           var strMaker = e.options[e.selectedIndex].value;    
               $.ajax({
                     type:"post",
-                    url:"UserManagement/SellCar_GetVin.php",
+                    url:"UserManagement/SellCar_GetDetails.php",
                     data:"vin="+strMaker,
                     dataType: 'html',
                         success:function(data){
-                         $('#sellCarVIN').html(data);                     
+                        $('#SellCar_year').val(data);                     
+                    }
+                 });
+
+               $.ajax({
+                    type:"post",
+                    url:"UserManagement/SellCar_GetColor.php",
+                    data:"vin="+strMaker,
+                    dataType: 'html',
+                        success:function(data){
+                        $('#SellCar_color').val(data);                     
                     }
                  });
             }       
@@ -125,7 +135,7 @@ function getCarDetails(){
       echo "</div>             \n"; 
       echo "</label>\n"; 
       echo "<div class=\"col-md-9\">\n"; 
-      echo "<select class=\"form-control\" name=\"sellCarVIN\" id=\"sellCarVIN\"><option value=\"\">VIN Number</option>";
+      echo "<select class=\"form-control\" name=\"sellCarVIN\" onclick=\"getCarDetails()\" id=\"sellCarVIN\"><option value=\"\">VIN Number</option>";
       echo "</select>"; 
       echo "</div>\n";
       echo "</div>\n";
@@ -140,7 +150,7 @@ function getCarDetails(){
     </div>              
   </label>  
   <div class="col-md-9">
-   <input type="digits" id="year" class="form-control" name="year" parsley-required="true" readonly="readonly" placeholder="Year">
+   <input type="digits" id="SellCar_year" class="form-control" name="SellCar_year" parsley-required="true" readonly="readonly" placeholder="Year">
  </div>
 </div>
 
@@ -151,7 +161,7 @@ function getCarDetails(){
   </div>             
 </label>
 <div class="col-md-9">
-  <input type="text" id="color" class="form-control" name="color" parsley-required="true" readonly="readonly" placeholder="Color" />
+  <input type="text" id="SellCar_color" class="form-control" name="SellCar_color" parsley-required="true" readonly="readonly" placeholder="Color" />
 </div>
 </div>
 

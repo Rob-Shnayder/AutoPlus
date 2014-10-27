@@ -11,8 +11,9 @@ function showDiv()  {
 
 
 function getMakeValue(){
-          var e = document.getElementById("manufacture");
+          var e = document.getElementById("buy_manufacture");
           var strMaker = e.options[e.selectedIndex].value;
+          //document.write(strMaker);
                  
               $.ajax({
                     type:"post",
@@ -20,7 +21,7 @@ function getMakeValue(){
                     data:"make="+strMaker,
                     dataType: 'html',
                         success:function(data){
-                         $('#model').html(data);                     
+                         $('#buy_model').html(data);                     
                     }
                  });
             }
@@ -76,7 +77,7 @@ function getMakeValue(){
       echo "</label>\n"; 
       echo "<div class=\"col-md-9\">\n"; 
     
-      echo "<select class=\"form-control\" name=\"model\" id=\"model\"><option value=\"\">Model</option>";
+      echo "<select class=\"form-control\" name=\"buy_model\" id=\"buy_model\"><option value=\"\">Model</option>";
 
       echo "</select>";
       ?>
