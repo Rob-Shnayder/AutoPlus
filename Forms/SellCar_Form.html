@@ -20,7 +20,7 @@ function getMakerValue(){
                     data:"make="+strMaker,
                     dataType: 'html',
                         success:function(data){
-                         $('#model').html(data);                     
+                         $('#sellCarmodel').html(data);                     
                     }
                  });
             }
@@ -28,18 +28,35 @@ function getMakerValue(){
 
 function getModelValue(){
           
-          var e = document.getElementById("model");
-          var strMaker = e.options[e.selectedIndex].value;        
+          var e = document.getElementById("sellCarmodel");
+          var strMaker = e.options[e.selectedIndex].value;    
+          //document.write(strMaker);    
               $.ajax({
                     type:"post",
                     url:"UserManagement/SellCar_GetVin.php",
                     data:"model="+strMaker,
                     dataType: 'html',
                         success:function(data){
-                         $('#VIN').html(data);                     
+                         $('#sellCarVIN').html(data);                     
                     }
                  });
-            }            
+            }      
+
+
+function getCarDetails(){
+          
+          var e = document.getElementById("sellCarVIN");
+          var strMaker = e.options[e.selectedIndex].value;    
+              $.ajax({
+                    type:"post",
+                    url:"UserManagement/SellCar_GetVin.php",
+                    data:"vin="+strMaker,
+                    dataType: 'html',
+                        success:function(data){
+                         $('#sellCarVIN').html(data);                     
+                    }
+                 });
+            }       
 </script>
 
 
@@ -93,7 +110,7 @@ function getModelValue(){
       echo "</div>             \n"; 
       echo "</label>\n"; 
       echo "<div class=\"col-md-9\">\n";     
-      echo "<select class=\"form-control\" name=\"model\" onchange=\"getModelValue()\" id=\"model\"><option value=\"\">Model</option>";
+      echo "<select class=\"form-control\" name=\"sellCarmodel\" onclick=\"getModelValue()\" id=\"sellCarmodel\"><option value=\"\">Model</option>";
       echo "</select>";      
       //END MODEL FIELD
 
@@ -108,7 +125,7 @@ function getModelValue(){
       echo "</div>             \n"; 
       echo "</label>\n"; 
       echo "<div class=\"col-md-9\">\n"; 
-      echo "<select class=\"form-control\" name=\"VIN\" id=\"VIN\"><option value=\"\">VIN Number</option>";
+      echo "<select class=\"form-control\" name=\"sellCarVIN\" id=\"sellCarVIN\"><option value=\"\">VIN Number</option>";
       echo "</select>"; 
       echo "</div>\n";
       echo "</div>\n";
@@ -123,7 +140,7 @@ function getModelValue(){
     </div>              
   </label>  
   <div class="col-md-9">
-   <input type="digits" id="year" class="form-control" name="year" parsley-required="true" parsley-minlength="4" parsley-maxlength="4" placeholder="Year">
+   <input type="digits" id="year" class="form-control" name="year" parsley-required="true" readonly="readonly" placeholder="Year">
  </div>
 </div>
 
@@ -134,7 +151,7 @@ function getModelValue(){
   </div>             
 </label>
 <div class="col-md-9">
-  <input type="text" id="color" class="form-control" name="color" parsley-required="true" placeholder="Color" />
+  <input type="text" id="color" class="form-control" name="color" parsley-required="true" readonly="readonly" placeholder="Color" />
 </div>
 </div>
 

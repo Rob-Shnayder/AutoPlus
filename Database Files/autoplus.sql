@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Oct 24, 2014 at 10:37 PM
+-- Generation Time: Oct 27, 2014 at 01:10 PM
 -- Server version: 5.6.12-log
 -- PHP Version: 5.4.12
 
@@ -62,8 +62,44 @@ Join RealCarMakers C1 ON C1.id = M1.make_id
 Where C1.title = _make;
 END$$
 
+CREATE DEFINER=`root`@`localhost` PROCEDURE `GetCarVIN`(IN `_model` VARCHAR(17))
+BEGIN
+SELECT VIN
+FROM Car
+Where Model = _model;
+END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `GetDetailsFromVIN`(IN `_VIN` VARCHAR(17))
+BEGIN
+SELECT Year, Color
+FROM Car
+Where VIN = _VIN;
+END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `GetInventoryMakers`()
+BEGIN
+SELECT DISTINCT Make
+FROM Car
+ORDER BY Make ASC;
+END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `GetInventoryModel`(IN `_make` VARCHAR(35))
+BEGIN
+SELECT DISTINCT Model
+FROM Car
+WHERE Make = _make;
+END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `GetModelsForDropDown`(IN `_make` VARCHAR(35))
+BEGIN
+SELECT r1.title
+FROM realcarmodels R1
+JOIN Realcarmakers R2 on R1.make_ID = R2.id
+WHERE R2.title = _make;
+END$$
+
 CREATE DEFINER=`root`@`localhost` PROCEDURE `InsertCar`(IN `_Make` VARCHAR(20), IN `_Model` VARCHAR(20), IN `_VIN` VARCHAR(17), 
-IN `_Year` INT(4), IN `_Color` VARCHAR(20), IN `_Details` VARCHAR(250))
+IN `_Year` INT(4), IN `_Color` VARCHAR(20))
 BEGIN
 INSERT INTO Car
 (
@@ -71,16 +107,14 @@ VIN,
 Make,
 Model,
 Year,
-Color,
-Details
+Color
 )
 VALUES(
 _VIN,
 _Make,
 _Model,
 _Year,
-_Color,
-_Details
+_Color
 );
 END$$
 
@@ -172,17 +206,17 @@ CREATE TABLE IF NOT EXISTS `car` (
   `Model` varchar(20) NOT NULL,
   `Year` int(4) NOT NULL,
   `Color` varchar(20) NOT NULL,
-  `Details` varchar(250) NOT NULL,
   PRIMARY KEY (`CarID`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
 
 --
 -- Dumping data for table `car`
 --
 
-INSERT INTO `car` (`CarID`, `VIN`, `Make`, `Model`, `Year`, `Color`, `Details`) VALUES
-(1, 5148447, 'Ford', 'F150', 2007, 'Red', 'no comments'),
-(2, 851848484, 'Chevy', 'Silverado', 2007, 'Gray', 'No comments');
+INSERT INTO `car` (`CarID`, `VIN`, `Make`, `Model`, `Year`, `Color`) VALUES
+(1, 5148447, 'Ford', 'F150', 2007, 'Red'),
+(2, 851848484, 'Chevy', 'Silverado', 2007, 'Gray'),
+(3, 2147483647, 'AMC', 'Bronco', 1982, 'red');
 
 -- --------------------------------------------------------
 
@@ -200,7 +234,7 @@ CREATE TABLE IF NOT EXISTS `customer` (
   `State` varchar(2) NOT NULL,
   `Zip` varchar(5) NOT NULL,
   PRIMARY KEY (`CustomerID`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
 
 --
 -- Dumping data for table `customer`
@@ -208,7 +242,8 @@ CREATE TABLE IF NOT EXISTS `customer` (
 
 INSERT INTO `customer` (`CustomerID`, `FirstName`, `LastName`, `Phone`, `Email`, `Address`, `State`, `Zip`) VALUES
 (1, 'Bob', 'Johnson', '5619011036', 'Bjohnson@pens.com', '2566 w Tennessee', 'FL', '32304'),
-(4, 'a', 'a', 'a', 'a', 'aa', 'a', '');
+(4, 'a', 'a', 'a', 'a', 'aa', 'a', ''),
+(5, 'Robert', 'as', '561901036', 'lol@lol.com', '10323 Sunstream Lane', 'FL', '33428');
 
 -- --------------------------------------------------------
 
@@ -312,7 +347,7 @@ CREATE TABLE IF NOT EXISTS `realcarmodels` (
   `code` varchar(125) NOT NULL DEFAULT '',
   `title` varchar(125) NOT NULL DEFAULT '',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1315 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1314 ;
 
 --
 -- Dumping data for table `realcarmodels`
@@ -1232,14 +1267,16 @@ CREATE TABLE IF NOT EXISTS `users` (
   `lastname` varchar(30) NOT NULL,
   `email` varchar(35) NOT NULL,
   PRIMARY KEY (`userID`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=12 ;
 
 --
 -- Dumping data for table `users`
 --
 
 INSERT INTO `users` (`userID`, `username`, `password`, `firstname`, `lastname`, `email`) VALUES
-(1, 'Dev', 'morty', 'Rob', 'Shnayder', 'rob@autoplus.com');
+(1, 'Dev', 'morty', 'Rob', 'Shnayder', 'rob@autoplus.com'),
+(10, 'aaa', '', '', '', ''),
+(11, 'sss', '', '', '', '');
 
 --
 -- Constraints for dumped tables
