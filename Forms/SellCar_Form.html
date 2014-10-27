@@ -13,7 +13,7 @@ function showDiv()  {
 function getMakerValue(){
           
           var e = document.getElementById("manufacture");
-          var strMaker = e.options[e.selectedIndex].value;        
+          var strMaker = e.options[e.selectedIndex].value;  
               $.ajax({
                     type:"post",
                     url:"UserManagement/SellCar_GetModels.php",
@@ -67,7 +67,7 @@ function getModelValue(){
       <?php       
 
       //BEGIN MAKE FIELD   
-      require_once 'UserManagement/sqlConfig.php';
+      //require_once 'UserManagement/sqlConfig.php';
 
       $Query1="call GetInventoryMakers()";
       $res = $con->query("$Query1");

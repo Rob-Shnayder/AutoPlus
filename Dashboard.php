@@ -2,9 +2,9 @@
 function showhide(id){
   if (document.getElementById) {
     var divid = document.getElementById(id);
-    var divs = document.getElementsByClassName("contentso");
-    for (var i=0;i<divs.length;i+=1){
-      divs[i].style.display = 'none';
+    var checkDv = document.getElementsByClassName("contentso");
+    for (var i=0;i<checkDv.length;i+=1){
+      checkDv[i].style.display = 'none';
     }
     divid.style.display = "block";
   } 
@@ -34,11 +34,18 @@ function showhide(id){
 
   <div class="main">
     <div class="mainContent clearfix">
+      
+      <?php 
+       require_once 'UserManagement/sqlConfig.php';
+       ?>
 
       <div id="dashboard" class="contentso" style="display:none;">
         <h1>Dashboard</h1>
       </div> 
       
+      <div id="BuyCar" class="contentos" style="display:none;"> 
+        <?php include ('Forms/BuyCar_Form.html'); ?> 
+      </div>
 
       <div id="SellCar" class="contentso" style="display:none;">
             <?php include ('Forms/SellCar_Form.html'); ?> 
@@ -57,9 +64,7 @@ function showhide(id){
         <h1>Settings</h1>
       </div>
 
-      <div id="BuyCar" class="contentos" style="display:none;"> 
-        <?php include ('Forms/BuyCar_Form.html'); ?> 
-      </div>
+      
 
     
 

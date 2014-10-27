@@ -25,7 +25,7 @@ function getMakeValue(){
                  });
             }
 </script>
-
+   
 
 <h1>Buy Car</h1>   
 
@@ -38,25 +38,29 @@ function getMakeValue(){
     <div class="col-md-5 column well" style="margin-left: 3%; margin-right: 5%; display:block;" id="Form1" >    
 
       <div class="form-group">
-        <label for="manufacture" class="col-md-3 control-label">                 
+        <label for="buy_manufacture" class="col-md-3 control-label">                 
           <div>
             Manufacture
           </div>                 
         </label>  
         <div class="col-md-9">
 
-          <?php          
-          require_once 'UserManagement/sqlConfig.php';
+          <?php         
 
 
-      $Query1="SELECT title FROM realcarmakers";
-      $res = $con->query("$Query1");
-      echo "<select class=\"form-control\"name=\"manufacture\" onchange=\"getMakeValue()\" id=\"manufacture\" ><option value=\"\">Manufacture</option>";
-      while($row = mysqli_fetch_array($res))
+      $SQLQuery="SELECT title FROM realcarmakers";
+      $Result = $con->query("$SQLQuery");
+      echo "<select class=\"form-control\"name=\"buy_manufacture\" onchange=\"getMakeValue()\" id=\"buy_manufacture\" ><option value=\"\">Manufacture</option>";
+      while($rows = mysqli_fetch_array($Result))
       {
-        echo("</option><option value=". $row['title'] . ">". $row['title'] ."</option>");
+        echo("</option><option value=". $rows['title'] . ">". $rows['title'] ."</option>");
       }
       echo "</select>";
+      if ( is_array( $rows ) )
+        $output = "<script>console.log( 'Debug Objects: " . implode( ',', $rows) . "' );</script>";
+    else
+        $output = "<script>console.log( 'Debug Objects: " . $rows . "' );</script>";
+
 
 
       echo " </div>\n"; 
