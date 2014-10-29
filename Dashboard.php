@@ -23,7 +23,7 @@ function showhide(id){
 
     </div>
     <ul>
-      <li><a name="dashboard" onclick="showhide('dashboard')" href="#dashboard" id="targeted">dashboard</a></li>
+      <li><a name="dashboard" onclick="showhide('dashboard')" href="#dashboard">dashboard</a></li>
       <li><a name="Inventory" onclick="showhide('Inventory')" href="#Inventory">Inventory</a></li>
       <li><a name="BuyCar" onclick="showhide('BuyCar')" href="#BuyCar">Buy Car</a></li>
       <li><a name="SellCar" onclick="showhide('SellCar')" href="#SellCar">Sell Car</a></li>
@@ -39,9 +39,11 @@ function showhide(id){
       <?php 
        require_once 'UserManagement/sqlConfig.php';
        ?>
+       <div id="fake" class="contentso" style="display:block;">       
+      </div> 
 
       <div id="dashboard" class="contentso" style="display:block;">
-        <?php include ('Forms/Dashboard_Form.html'); ?> 
+        <?php include ('Forms/Test_Form.html'); ?> 
       </div> 
       
       <div id="BuyCar" class="contentos" style="display:none;"> 
@@ -54,6 +56,7 @@ function showhide(id){
 
       <div id="Inventory" class="contentso" style="display:none;">     
         <h1>Inventory</h1>
+
       </div>
 
       <div id="Search" class="contentso" style="display:none;">
@@ -67,5 +70,4 @@ function showhide(id){
 
     </div>
   </div>
-</div>
 </div>

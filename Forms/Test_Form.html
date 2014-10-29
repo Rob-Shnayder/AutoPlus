@@ -1,0 +1,101 @@
+<link href="css/Test_Page.css" rel="stylesheet">
+
+  <?php
+
+  $getUserName = $_SESSION['username'];
+  $SQLQuery="SELECT firstname From Users Where username = '$getUserName'";
+  $Result = $con->query("$SQLQuery");
+
+
+  while($rowss = mysqli_fetch_array($Result)) {
+    $name =  $rowss['firstname'];
+  }
+  echo "<h1>Welcome $name,</h1>";
+  ?>
+  
+     <div class="pricing-table group"> 
+       <center>
+        <h3>Dealership at a glance</h3>
+      </center>
+      <div class="block personal fl">
+        <h3 class="title">Currently In Inventory</h3>
+        <div class="content">
+          <p class="price">
+            <?php
+
+            $SQLQuery="SELECT Count(make) as 'Num'FROM Car C1 WHERE C1.CarID NOT IN (Select CarId From Sale)";
+            $Result = $con->query("$SQLQuery");
+
+
+            if(!$Result) {
+              printf("Error: %s\n", mysqli_error($con));
+              exit();
+            }
+
+            while($rowss = mysqli_fetch_array($Result)) {
+              $Count =  $rowss['Num'];
+            }
+            echo "<span>$Count</span>";
+            ?>
+            <sub>Cars</sub>
+          </p>
+        </div>
+
+      </div>
+      <div class="block professional fl">
+        <h3 class="title">Sold This Month</h3>
+        <!-- CONTENT -->
+        <div class="content">
+          <p class="price">
+            <?php
+            $Query2="SELECT count(*) as 'Num'FROM Sale Where Month(Sold_Date) = Month(now())";
+            $res2 = $con->query("$Query2");
+
+            while($rows = mysqli_fetch_array($res2)) {
+              $Count =  $rows['Num'];
+            }   
+            echo "<span>$Count</span>";
+
+            if($Count == 1) {
+              echo "<sub style=\"font-size:20px;\">Car Sold</sub>";                          
+            }
+            else if($Count > 1){
+              echo "<sub style=\"font-size:20px\">Cars Sold</sub>";  
+            }
+            ?>
+          </p>
+        </div>
+        <!-- /PT-FOOTER -->
+      </div>
+      <!-- /PROFESSIONAL -->
+      <!-- BUSINESS -->
+      <div class="block business fl">
+        <h3 class="title">Purchased This Month</h3>
+        <!-- CONTENT -->
+        <div class="content">
+          <p class="price">
+            <?php
+            $Query2="SELECT count(*) as 'Num' FROM BoughtCar Where Month(Bought_Date) = Month(now())";
+            $res2 = $con->query("$Query2");
+
+            while($rows = mysqli_fetch_array($res2)) {
+              $Count =  $rows['Num'];
+            }   
+            echo "<span>$Count</span>";
+
+            if($Count == 1) {
+              echo "<sub style=\"font-size:20px;\">Purchased Car</sub>";                          
+            }
+            else if($Count > 1){
+              echo "<sub style=\"font-size:20px\">Purchased Cars</sub>";  
+            }
+            ?>
+          </p>
+
+        </div>
+
+        <!-- /PT-FOOTER -->
+      </div>
+      <!-- /BUSINESS -->
+    </div>
+    <!-- /PRICING-TABLE -->
