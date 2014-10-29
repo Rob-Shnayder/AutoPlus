@@ -1,21 +1,18 @@
 <?php
 require_once 'sqlConfig.php';
 
-$manufacture = $_POST['buy_manufacture'];
-$model =  $_POST['buy_model'];
-$vinNum =  $_POST['vinNumber'];
-$year =  $_POST['year'];
-$color =  $_POST['color'];
-$price =  $_POST['price'];
+
+$vinNum =  $_POST['sellCarVIN'];
+$price =  $_POST['SellCar_price'];
 
 
-$firstname =  $_POST['firstname'];
-$lastname =  $_POST['lastname'];
-$phone = $_POST['phone'];
-$email = $_POST['email'];
-$address = $_POST['address'];
-$state = $_POST['state'];
-$zip = $_POST['zip'];
+$firstname =  $_POST['SellCar_firstname'];
+$lastname =  $_POST['SellCar_lastname'];
+$phone = $_POST['SellCar_phone'];
+$email = $_POST['SellCar_email'];
+$address = $_POST['SellCar_address'];
+$state = $_POST['SellCar_state'];
+$zip = $_POST['SellCar_zip'];
 
 
 
@@ -24,10 +21,6 @@ $Query1="call InsertCustomer('$firstname', '$lastname', '$phone','$email', '$add
 $res = $con->query("$Query1");
 if($res)
 {
-
-	$Query2="call InsertCar('$manufacture', '$model', '$vinNum', '$year', '$color')";
-	$res2 = $con->query("$Query2");
-
 	$Query2 = "SELECT CustomerID FROM customer WHERE firstname = '$firstname' AND lastname = '$lastname' ";	
 	$querySetup = $con->query("$Query2");	 
 	while($rowss = mysqli_fetch_array($querySetup)) {
@@ -41,18 +34,17 @@ if($res)
 	}
 
 
-	$Query4="call BuyCar('$getCarID', '$getCustomerID','$price')";
+	$Query4="call InsertSale('$getCarID', '$price', '$getCustomerID')";
 	$querySetup = $con->query("$Query4");
 	if($querySetup) {
 		mysql_close($con);
         header( 'Location: ../Success.php');
 	}
-
 }
 else
 {
-  echo "Error occured in InsertCustomer";
-  echo mysqli_errno($con);
+  	printf("Error: %s\n", mysqli_error($con));
+	exit();
 }
 
 

@@ -1,10 +1,10 @@
 <script type="text/javascript">
+
 function showDiv()  {
-  if ( ($('#vin').parsley('validate')) && ($('#year').parsley('validate'))
-    && ($('#color').parsley('validate')) && ($('#price').parsley('validate')))
+  if (($('#manufacture').parsley('validate')) && ($('#sellCarmodel').parsley('validate')) && ($('#sellCarVIN').parsley('validate')) && ($('#SellCar_year').parsley('validate'))
+    && ($('#SellCar_color').parsley('validate')) && ($('#SellCar_price').parsley('validate')))
   {
-    document.getElementById("Form2").style.display = "block";
-    $('#model').parsley( 'data-parsley-ui-enabled' );
+    document.getElementById("Form22").style.display = "block";
   }
 
 }
@@ -77,7 +77,7 @@ function getCarDetails(){
 <div class="container">
  <div class="row clearfix"> 
 
-  <form role="form" class="form-horizontal" method="post" id="carForm" action="UserManagement/BuyCar.php" parsley-validate >
+  <form role="form" class="form-horizontal" method="post" id="carForm" action="UserManagement/SellCar.php" parsley-validate >
     <div class="col-md-5 column well" style="margin-left: 3%; margin-right: 5%; display:block;" id="Form1" >    
       <center>
       <h4>Please choose a vehicle from inventory</h4> 
@@ -98,7 +98,7 @@ function getCarDetails(){
 
       $Query1="call GetInventoryMakers()";
       $res = $con->query("$Query1");
-      echo "<select class=\"form-control\"name=\"manufacture\" onchange=\"getMakerValue()\" id=\"manufacture\" ><option value=\"\">Manufacture</option>";
+      echo "<select class=\"form-control\"name=\"manufacture\" onchange=\"getMakerValue()\" parsley-required=\"true\" id=\"manufacture\" ><option value=\"\">Manufacture</option>";
       while($row = mysqli_fetch_array($res))
       {
         echo("</option><option value=". $row['Make'] . ">". $row['Make'] ."</option>");
@@ -120,7 +120,7 @@ function getCarDetails(){
       echo "</div>             \n"; 
       echo "</label>\n"; 
       echo "<div class=\"col-md-9\">\n";     
-      echo "<select class=\"form-control\" name=\"sellCarmodel\" onclick=\"getModelValue()\" id=\"sellCarmodel\"><option value=\"\">Model</option>";
+      echo "<select class=\"form-control\" name=\"sellCarmodel\" onclick=\"getModelValue()\" parsley-required=\"true\" id=\"sellCarmodel\"><option value=\"\">Model</option>";
       echo "</select>";      
       //END MODEL FIELD
 
@@ -135,7 +135,7 @@ function getCarDetails(){
       echo "</div>             \n"; 
       echo "</label>\n"; 
       echo "<div class=\"col-md-9\">\n"; 
-      echo "<select class=\"form-control\" name=\"sellCarVIN\" onclick=\"getCarDetails()\" id=\"sellCarVIN\"><option value=\"\">VIN Number</option>";
+      echo "<select class=\"form-control\" name=\"sellCarVIN\" onclick=\"getCarDetails()\" parsley-required=\"true\" id=\"sellCarVIN\"><option value=\"\">VIN Number</option>";
       echo "</select>"; 
       echo "</div>\n";
       echo "</div>\n";
@@ -172,7 +172,7 @@ function getCarDetails(){
  </div>             
 </label>
 <div class="col-md-9">
-  <input type="digits" id="price" class="form-control" name="price" parsley-required="true" placeholder="Price" />
+  <input type="digits" id="SellCar_price" class="form-control" name="SellCar_price" parsley-required="true" placeholder="Price" />
 </div>
 </div>
 
@@ -186,7 +186,7 @@ function getCarDetails(){
 </div>
 
 
-<div class="col-md-5 column well" style="display:none" id="Form2"> 
+<div class="col-md-5 column well" style="display:none" id="Form22"> 
   <div class="form-group">
     <label for="firstName" class="col-md-3 control-label">                 
       <div class="newgameheight">
@@ -194,7 +194,7 @@ function getCarDetails(){
       </div>                 
     </label>  
     <div class="col-md-9">
-     <input type="text" class="form-control" name="firstname" autofocus parsley-required="true" placeholder="First Name">
+     <input type="text" class="form-control" name="SellCar_firstname" autofocus parsley-required="true" placeholder="First Name">
    </div>
  </div>
 
@@ -205,7 +205,7 @@ function getCarDetails(){
     </div>             
   </label>
   <div class="col-md-9">
-    <input type="text" class="form-control" name="lastname" parsley-required="true" placeholder="Last Name" />
+    <input type="text" class="form-control" name="SellCar_lastname" parsley-required="true" placeholder="Last Name" />
   </div>
 </div>
 
@@ -216,7 +216,7 @@ function getCarDetails(){
   </div>             
 </label>
 <div class="col-md-9">
-  <input type="digits" class="form-control" name="phone" parsley-required="true" id="phone" parsley-maxlength="10" placeholder="Phone" />
+  <input type="digits" class="form-control" name="SellCar_phone" parsley-required="true" id="phone" parsley-maxlength="10" placeholder="Phone" />
 </div>
 </div>
 
@@ -227,7 +227,7 @@ function getCarDetails(){
     </div>              
   </label>  
   <div class="col-md-9">
-   <input type="email" class="form-control" name="email" parsley-required="true" placeholder="Email">
+   <input type="email" class="form-control" name="SellCar_email" parsley-required="true" placeholder="Email">
  </div>
 </div>
 
@@ -238,7 +238,7 @@ function getCarDetails(){
   </div>             
 </label>
 <div class="col-md-9">
-  <input type="text" class="form-control" name="address" parsley-required="true" id="exampleInputPassword1" placeholder="Address" />
+  <input type="text" class="form-control" name="SellCar_address" parsley-required="true" id="exampleInputPassword1" placeholder="Address" />
 </div>
 </div>
 
@@ -249,7 +249,7 @@ function getCarDetails(){
  </div>             
 </label>
 <div class="col-md-9">
-  <input type="text" class="form-control" name="state" parsley-required="true" id="exampleInputPassword1" placeholder="State" parsley-maxlength="2" />
+  <input type="text" class="form-control" name="SellCar_state" parsley-required="true" id="exampleInputPassword1" placeholder="State" parsley-maxlength="2" />
 </div>
 </div>
 
@@ -260,7 +260,7 @@ function getCarDetails(){
  </div>             
 </label>
 <div class="col-md-9">
-  <input type="digits" class="form-control" name="zip" parsley-required="true" placeholder="Zip"  parsley-maxlength="5"/>
+  <input type="digits" class="form-control" name="SellCar_zip" parsley-required="true" placeholder="Zip"  parsley-maxlength="5"/>
 </div>
 </div>
 

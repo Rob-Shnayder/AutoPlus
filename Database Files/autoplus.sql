@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Oct 27, 2014 at 01:10 PM
+-- Generation Time: Oct 29, 2014 at 04:08 AM
 -- Server version: 5.6.12-log
 -- PHP Version: 5.4.12
 
@@ -26,8 +26,7 @@ DELIMITER $$
 --
 -- Procedures
 --
-CREATE DEFINER=`root`@`localhost` PROCEDURE `BuyCar`(IN `_CarID` INT(11), IN `_CustomerID` INT(20), IN `_Bought_Price` float, 
-IN `_Bought_Date` DATE)
+CREATE DEFINER=`root`@`localhost` PROCEDURE `BuyCar`(IN `_CarID` INT(11), IN `_CustomerID` INT(20), IN `_Bought_Price` float)
 BEGIN
 INSERT INTO BoughtCar
 (
@@ -39,7 +38,7 @@ CustomerID
 VALUES(
 _CarID,
 _Bought_Price,
-_Bought_Date,
+CURDATE(),
 _CustomerID
 );
 END$$
@@ -71,7 +70,7 @@ END$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `GetDetailsFromVIN`(IN `_VIN` VARCHAR(17))
 BEGIN
-SELECT Year, Color
+SELECT Year
 FROM Car
 Where VIN = _VIN;
 END$$
@@ -79,7 +78,9 @@ END$$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `GetInventoryMakers`()
 BEGIN
 SELECT DISTINCT Make
-FROM Car
+FROM Car C1
+WHERE C1.CarID NOT IN
+(Select CarId From Sale)
 ORDER BY Make ASC;
 END$$
 
@@ -142,6 +143,24 @@ _Zip
 );
 END$$
 
+CREATE DEFINER=`root`@`localhost` PROCEDURE `InsertSale`(IN `_CarID` INT, IN `_Sold_Price` FLOAT, 
+IN `_CustomerID` INT)
+BEGIN
+INSERT INTO sale
+(
+CarID,
+Sold_Price,
+Sold_Date,
+CustomerID
+)
+VALUES(
+_CarID,
+_Sold_Price,
+CURDATE(),
+_CustomerID
+);
+END$$
+
 CREATE DEFINER=`root`@`localhost` PROCEDURE `Login`(IN `_username` VARCHAR(30), IN `_password` VARCHAR(30))
 SELECT Username, Password
 From users
@@ -190,8 +209,8 @@ CREATE TABLE IF NOT EXISTS `boughtcar` (
 --
 
 INSERT INTO `boughtcar` (`CarID`, `Bought_Price`, `Bought_Date`, `CustomerID`) VALUES
-(1, 19995, '0000-00-00', 1),
-(1, 19995, '2014-10-26', 1);
+(1, 19995, '2014-10-26', 1),
+(8, 35000, '2014-10-28', 19);
 
 -- --------------------------------------------------------
 
@@ -201,22 +220,26 @@ INSERT INTO `boughtcar` (`CarID`, `Bought_Price`, `Bought_Date`, `CustomerID`) V
 
 CREATE TABLE IF NOT EXISTS `car` (
   `CarID` int(11) NOT NULL AUTO_INCREMENT,
-  `VIN` int(17) NOT NULL,
+  `VIN` varchar(17) NOT NULL,
   `Make` varchar(20) NOT NULL,
   `Model` varchar(20) NOT NULL,
   `Year` int(4) NOT NULL,
   `Color` varchar(20) NOT NULL,
   PRIMARY KEY (`CarID`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=9 ;
 
 --
 -- Dumping data for table `car`
 --
 
 INSERT INTO `car` (`CarID`, `VIN`, `Make`, `Model`, `Year`, `Color`) VALUES
-(1, 5148447, 'Ford', 'F150', 2007, 'Red'),
-(2, 851848484, 'Chevy', 'Silverado', 2007, 'Gray'),
-(3, 2147483647, 'AMC', 'Bronco', 1982, 'red');
+(1, '12345873478234567', 'Ford', 'F150', 2007, 'Red'),
+(2, '21455873478234567', 'Chevy', 'Silverado', 2007, 'Gray'),
+(3, '38921773478234567', 'AMC', 'Bronco', 1982, 'red'),
+(5, '44441773478234567', 'Ford', 'Mustang', 2012, 'Yellow'),
+(6, '12345678912345678', 'Audi', 'A3', 2011, 'Red'),
+(7, '18796574233578524', 'Cadillac', 'ATS', 2007, 'Black'),
+(8, '18796578763278524', 'BMW', '1', 2007, 'Black');
 
 -- --------------------------------------------------------
 
@@ -234,7 +257,7 @@ CREATE TABLE IF NOT EXISTS `customer` (
   `State` varchar(2) NOT NULL,
   `Zip` varchar(5) NOT NULL,
   PRIMARY KEY (`CustomerID`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=20 ;
 
 --
 -- Dumping data for table `customer`
@@ -243,7 +266,12 @@ CREATE TABLE IF NOT EXISTS `customer` (
 INSERT INTO `customer` (`CustomerID`, `FirstName`, `LastName`, `Phone`, `Email`, `Address`, `State`, `Zip`) VALUES
 (1, 'Bob', 'Johnson', '5619011036', 'Bjohnson@pens.com', '2566 w Tennessee', 'FL', '32304'),
 (4, 'a', 'a', 'a', 'a', 'aa', 'a', ''),
-(5, 'Robert', 'as', '561901036', 'lol@lol.com', '10323 Sunstream Lane', 'FL', '33428');
+(5, 'Robert', 'as', '561901036', 'lol@lol.com', '10323 Sunstream Lane', 'FL', '33428'),
+(6, 'Test', 'Test1', '5618498450', 'lol2@lol.com', '15489 Tennesee St', 'FL', '33428'),
+(7, 'tester2', 'teste', '5618478456', 'lol2@lol.com', '84654 Tennessee Street', 'FL', '33428'),
+(16, 'Johnny', 'Depp', '561957', 'lol3@lol.com', '8795 Tennessee Street', 'FL', '68759'),
+(17, 'Alex', 'Ovechkin', '8459658745', 'aOvechkin@capitals.com', '1049 Penn Avenue', 'PA', '87965'),
+(19, 'Sidney', 'Crosby', '8742563489', 'sidthekid@pens.com', '8478 Poop Drive', 'PA', '87561');
 
 -- --------------------------------------------------------
 
@@ -1251,7 +1279,14 @@ CREATE TABLE IF NOT EXISTS `sale` (
   PRIMARY KEY (`SaleID`),
   KEY `CarID` (`CarID`),
   KEY `CustomerID` (`CustomerID`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
+
+--
+-- Dumping data for table `sale`
+--
+
+INSERT INTO `sale` (`SaleID`, `CarID`, `Sold_Price`, `Sold_Date`, `CustomerID`) VALUES
+(3, 2, 19995, '2014-10-28', 16);
 
 -- --------------------------------------------------------
 

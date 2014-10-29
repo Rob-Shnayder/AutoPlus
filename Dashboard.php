@@ -14,6 +14,7 @@ function showhide(id){
 
 
 <?php include 'head.html' ?>
+<?php include 'nav.html' ?>
 
 
 <div class="admin-panel clearfix">
@@ -39,8 +40,8 @@ function showhide(id){
        require_once 'UserManagement/sqlConfig.php';
        ?>
 
-      <div id="dashboard" class="contentso" style="display:none;">
-        <h1>Dashboard</h1>
+      <div id="dashboard" class="contentso" style="display:block;">
+        <?php include ('Forms/Dashboard_Form.html'); ?> 
       </div> 
       
       <div id="BuyCar" class="contentos" style="display:none;"> 
@@ -63,22 +64,6 @@ function showhide(id){
       <div id="Settings" class="contentso" style="display:none;">     
         <h1>Settings</h1>
       </div>
-
-      
-
-    
-
-
-
-  
-
-
-     
-
-
-
-
-
 
     </div>
   </div>
