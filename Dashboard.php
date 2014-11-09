@@ -60,7 +60,7 @@ function showhide(id){
       </div>
 
       <div id="Search" class="contentso" style="display:none;">
-        <h1>Search</h1>
+        <?php include ('Forms/Search_Form.html'); ?>        
       </div>    
  
 

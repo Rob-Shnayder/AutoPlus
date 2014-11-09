@@ -1,0 +1,61 @@
+<h1>At a glance</h1>   
+
+
+
+<div class="container">
+ <div class="row clearfix"> 
+
+  <form role="form" class="form-horizontal" method="post" id="carForm" parsley-validate >
+    <div class="col-md-5 column well" style="margin-left: 3%; margin-right: 5%; display:block;" id="Form1" >    
+  
+      <div class="form-group">
+        <label for="InventoryNumber" class="col-md-3 control-label">                 
+          <div>
+            Vehicles in inventory
+          </div>                 
+        </label>  
+        <div class="col-md-9">
+
+          <?php
+      //Begin InventoryNumber Field
+      //Stored Procedures not used here because of a MySqli bug.
+          $Query1="SELECT Count(make) as 'Num'FROM Car C1 WHERE C1.CarID NOT IN (Select CarId From Sale)";
+          $res = $con->query("$Query1");
+          while($rowss = mysqli_fetch_array($res)) {
+            $Count =  $rowss['Num'];
+          }
+          echo "<label class=\"form-control\" name=\"InventoryNumber\"> $Count </label>";
+          ?>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="SalesNumber" class="col-md-3 control-label">                 
+          <div>
+            Cars sold this month
+          </div>                 
+        </label>  
+        <div class="col-md-9">
+
+          <?php
+          $Query2="SELECT count(*) as 'Num'FROM Sale Where Month(Sold_Date) = Month(now())";
+          $res2 = $con->query("$Query2");
+
+          while($rows = mysqli_fetch_array($res2)) {
+            $Count =  $rows['Num'];
+          }   
+
+          echo "<label class=\"form-control\" name=\"SalesNumber\"> $Count </label>";
+          ?>
+
+        </div>
+      </div>
+
+
+    </div>
+</form>
+</div>
+</div>
+</div>
+
+
