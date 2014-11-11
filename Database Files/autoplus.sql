@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Oct 29, 2014 at 04:08 AM
+-- Generation Time: Nov 11, 2014 at 03:07 AM
 -- Server version: 5.6.12-log
 -- PHP Version: 5.4.12
 
@@ -41,6 +41,21 @@ _Bought_Price,
 CURDATE(),
 _CustomerID
 );
+END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `CountCarsinInventory`()
+BEGIN
+SELECT Count(make) as 'Num'
+FROM Car C1
+WHERE C1.CarID NOT IN
+(Select CarId From Sale);
+END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `CountCurrentMonthSales`()
+BEGIN
+SELECT count(*) as 'Num'
+FROM Sale
+Where Month(Sold_Date) = Month(now());
 END$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `GenerateReport`()
@@ -187,6 +202,78 @@ _email
 
 END$$
 
+CREATE DEFINER=`root`@`localhost` PROCEDURE `Search`(IN `_make` VARCHAR(20), 
+IN `_model` VARCHAR(20), IN `_year` INT(4), IN `_color` VARCHAR(20))
+BEGIN
+SET @_Make = _make;
+SET @_Model = _model;
+SET @_Year = _year;
+SET @_Color = _color;
+SET @SQL = "SELECT * FROM Car ";
+SET @ANDFlag = 0;
+
+
+IF(@_make != "NULL") 
+THEN
+SET @SUBSTRING = "WHERE Make = @_Make ";
+SET @SQL = CONCAT(@SQL, @SUBSTRING);
+SET @ANDFlag = 1;
+END IF;
+
+
+
+IF(@_model != "NULL") 
+THEN
+SET @SUBSTRING = "Model = @_model ";
+	
+	IF(@ANDFlag = 1)
+	THEN
+	SET @SUBSTRING = CONCAT("AND ", @SUBSTRING); 
+    ELSE
+    SET @SUBSTRING = CONCAT("WHERE ", @SUBSTRING); 
+    SET @ANDFlag = 1;
+	END IF;
+
+SET @SQL = CONCAT(@SQL, @SUBSTRING);
+END IF;
+
+IF(@_year != "NULL") 
+THEN
+SET @SUBSTRING = "Year = @_year ";
+	
+	IF(@ANDFlag = 1)
+	THEN
+	SET @SUBSTRING = CONCAT("AND ", @SUBSTRING); 
+    ELSE
+    SET @SUBSTRING = CONCAT("WHERE ", @SUBSTRING); 
+    SET @ANDFlag = 1;
+	END IF;
+
+SET @SQL = CONCAT(@SQL, @SUBSTRING);
+END IF;
+
+IF(@_color != "NULL") 
+THEN
+SET @SUBSTRING = "Color = @_color ";
+	
+	IF(@ANDFlag = 1)
+	THEN
+	SET @SUBSTRING = CONCAT("AND ", @SUBSTRING); 
+    ELSE
+    SET @SUBSTRING = CONCAT("WHERE ", @SUBSTRING); 
+    SET @ANDFlag = 1;
+	END IF;
+
+SET @SQL = CONCAT(@SQL, @SUBSTRING);
+END IF;
+
+
+PREPARE dynamic_statement FROM @SQL;
+EXECUTE dynamic_statement;
+DEALLOCATE PREPARE dynamic_statement;
+
+END$$
+
 DELIMITER ;
 
 -- --------------------------------------------------------
@@ -210,7 +297,8 @@ CREATE TABLE IF NOT EXISTS `boughtcar` (
 
 INSERT INTO `boughtcar` (`CarID`, `Bought_Price`, `Bought_Date`, `CustomerID`) VALUES
 (1, 19995, '2014-10-26', 1),
-(8, 35000, '2014-10-28', 19);
+(8, 35000, '2014-10-28', 19),
+(9, 25559, '2014-11-09', 20);
 
 -- --------------------------------------------------------
 
@@ -226,7 +314,7 @@ CREATE TABLE IF NOT EXISTS `car` (
   `Year` int(4) NOT NULL,
   `Color` varchar(20) NOT NULL,
   PRIMARY KEY (`CarID`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=9 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=10 ;
 
 --
 -- Dumping data for table `car`
@@ -239,7 +327,8 @@ INSERT INTO `car` (`CarID`, `VIN`, `Make`, `Model`, `Year`, `Color`) VALUES
 (5, '44441773478234567', 'Ford', 'Mustang', 2012, 'Yellow'),
 (6, '12345678912345678', 'Audi', 'A3', 2011, 'Red'),
 (7, '18796574233578524', 'Cadillac', 'ATS', 2007, 'Black'),
-(8, '18796578763278524', 'BMW', '1', 2007, 'Black');
+(8, '18796578763278524', 'BMW', '1', 2007, 'Black'),
+(9, '95445678714531148', 'Toyota', 'Celica', 2008, 'Green');
 
 -- --------------------------------------------------------
 
@@ -257,7 +346,7 @@ CREATE TABLE IF NOT EXISTS `customer` (
   `State` varchar(2) NOT NULL,
   `Zip` varchar(5) NOT NULL,
   PRIMARY KEY (`CustomerID`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=20 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=21 ;
 
 --
 -- Dumping data for table `customer`
@@ -271,7 +360,8 @@ INSERT INTO `customer` (`CustomerID`, `FirstName`, `LastName`, `Phone`, `Email`,
 (7, 'tester2', 'teste', '5618478456', 'lol2@lol.com', '84654 Tennessee Street', 'FL', '33428'),
 (16, 'Johnny', 'Depp', '561957', 'lol3@lol.com', '8795 Tennessee Street', 'FL', '68759'),
 (17, 'Alex', 'Ovechkin', '8459658745', 'aOvechkin@capitals.com', '1049 Penn Avenue', 'PA', '87965'),
-(19, 'Sidney', 'Crosby', '8742563489', 'sidthekid@pens.com', '8478 Poop Drive', 'PA', '87561');
+(19, 'Sidney', 'Crosby', '8742563489', 'sidthekid@pens.com', '8478 Poop Drive', 'PA', '87561'),
+(20, 'Eric', 'Shafer', '8475612563', 'ericS@lol.com', '1029 erica street', 'WA', '84766');
 
 -- --------------------------------------------------------
 
@@ -1279,7 +1369,7 @@ CREATE TABLE IF NOT EXISTS `sale` (
   PRIMARY KEY (`SaleID`),
   KEY `CarID` (`CarID`),
   KEY `CustomerID` (`CustomerID`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
 
 --
 -- Dumping data for table `sale`
