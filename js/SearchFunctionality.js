@@ -33,4 +33,10 @@ function drawRow(rowData) {
     row.append($("<td>" + rowData.VIN + "</td>"));
     row.append($("<td>" + rowData.Year + "</td>"));
     row.append($("<td>" + rowData.Color + "</td>"));
-}           
+    row.append($("<td><button id=" + rowData.VIN + " onclick=\"UpdateRecord(this.id)\" class=\"btn btn-primary btn-xs\"><span class=\"glyphicon glyphicon-pencil\"></span></button></td>"));
+  }        
+
+function UpdateRecord(clicked_id)
+{
+    window.location.replace("UpdateInventory_Form.php?VIN=" + clicked_id);
+}
