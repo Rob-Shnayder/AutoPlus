@@ -1,88 +1,91 @@
-<h1>Find A Car Quiz</h1>
- <div class="container" style = "margin-left: 3%;"> 	
- <div class="row clearfix"> 
-    <div id="Quiz">
-      <br />
-      <div id="question2">1) Vehicle Type </div>
-        <select>
-        	  <option value="default" selected>Choose a type</option>
-			  <option value="Compact">Compact</option>
-			  <option value="Large">Large</option>
-			  <option value="Midsize">Midsize</option>			  
-			  <option value="Pick-up">Pick-up truck</option>	  
-			  <option value="Specialpurpose">Special purpose vehicle</option>
-			  <option value="Station-wagon">Station-wagon</option>			  
-			  <option value="SUV">SUV</option>
-			  <option value="TwoSeater">Two Seater</option>			  
-			  <option value="Van">Van</option>	
-			</select>
-      <br />
-      <br>
-      <div id="question3">
-        <div class="question">2) Region of manufacture</div>
-        <input type="radio" name="question3" value="a"/>
-        <label>North America</label>
-        <input type="radio" name="question3" value="b"/>
-        <label>Europe</label>
-        <input type="radio" name="question3" value="c"/>
-        <label>Asia</label>
-      </div>
-      <br />
-      <div id="question4">
-        <div class="question">3) Transmission</div>
-        <input type="radio" name="question4" value="a"/>
-        <label>Automatic</label>
-        <input type="radio" name="question4" value="b"/>
-        <label>Manual</label>
-        <input type="radio" name="question4" value="c"/>
-        <label>Semi-Automatic</label>
-        <input type="radio" name="question4" value="d"/>
-        <label>Automated Manual</label>
-      </div>
-      <br />
-      <div id="question5">
-        <div class="question">4) Engine</div>
-        <input type="radio" name="question5" value="a"/>
-        <label>4 cylinder</label>
-        <input type="radio" name="question5" value="b"/>
-        <label>6 cylinder</label>
-        <input type="radio" name="question5" value="c"/>
-        <label>8 cylinder</label>
-        <input type="radio" name="question5" value="d"/>
-        <label>10-12 cylinder</label>
-      </div>
-      <br />
-      <div id="question6">
-        <div class="question">5) Miles Per Gallon (MPG)</div>
-        <input type="radio" name="question6" value="a"/>
-        <label>Greater than 10</label>
-        <input type="radio" name="question6" value="b"/>
-        <label>Greater than 20</label>
-        <input type="radio" name="question6" value="c"/>
-        <label>Greater than 30</label>
-        <input type="radio" name="question6" value="d"/>
-        <label>Greater than 40</label>
-      </div>
-      <br />
-      <div id="question7">
-        <div class="question">6) Drivetrain</div>
-        <input type="radio" name="question7" value="a"/>
-        <label>Forward wheel drive</label>
-        <input type="radio" name="question7" value="b"/>
-        <label>Rear wheel drive</label>
-        <input type="radio" name="question7" value="c"/>
-        <label>All wheel drive</label>        
-      </div>
-      <br />
-      <div id="question8">
-        <div class="question">7) Luxury Prefered?</div>
-        <input type="radio" name="question8" value="a"/>
-        <label>Yes</label>
-        <input type="radio" name="question8" value="b"/>
-        <label>No</label>
-      </div>
-      <br />
 
+
+<h1>Car Finder Quiz</h1>
+<div class="container" style = "margin-left: 3%;"> 	
+ <div class="row clearfix"> 
+  <div id="Quiz">
+    <form role="form" class="form-horizontal" method="post" id="quizForm" action="CarQuiz.php">
+
+      <br />
+      <h4>1) Vehicle Type </h4>
+      <select name="question2">
+       <option value="default" selected>Choose a type</option>
+       <option value="Compact">Compact</option>
+       <option value="Large">Large</option>
+       <option value="Midsize">Midsize</option>			  
+       <option value="Pick-up">Pick-up truck</option>	  
+       <option value="Specialpurpose">Special purpose vehicle</option>
+       <option value="Station-wagon">Station wagon</option>			  
+       <option value="SUV">SUV</option>
+       <option value="TwoSeater">Two Seater</option>			  
+       <option value="Van">Van</option>	
+     </select>
+     <br />
+     <br>
+     <div id="Q2">
+      <h4>2) Region of manufacture</h4>
+      <input type="radio" name="question3" value="North America"/>
+      <label>North America</label><br />
+      <input type="radio"  name="question3" value="Europe"/>
+      <label>Europe</label><br />
+      <input type="radio" name="question3" value="Asia"/>
+      <label>Asia</label><br />
     </div>
+    <br />
+    <div id="Q3">
+      <h4>3) Transmission</h4>
+      <input type="radio" name="question4" value="A"/>
+      <label>Automatic</label><br />
+      <input type="radio" name="question4" value="M"/>
+      <label>Manual</label><br />
+      <input type="radio" name="question4" value="SA"/>
+      <label>Semi-Automatic</label><br />
+      <input type="radio" name="question4" value="AM"/>
+      <label>Automated Manual</label><br />
+    </div>
+    <br />
+    <div id="question5">
+      <h4>4) Engine</h4>
+      <input type="radio" name="question5" value="4"/>
+      <label>4 cylinder</label><br />
+      <input type="radio" name="question5" value="6"/>
+      <label>6 cylinder</label><br />
+      <input type="radio" name="question5" value="8"/>
+      <label>8 cylinder</label><br />
+      <input type="radio" name="question5" value="10"/>
+      <label>10-12 cylinder</label><br />
+    </div>
+    <br />
+    <div id="question6">
+      <h4>5) Miles Per Gallon (MPG)</h4>
+      <input type="radio" name="question6" value="10"/>
+      <label>Greater than 10</label><br />
+      <input type="radio" name="question6" value="20"/>
+      <label>Greater than 20</label><br />
+      <input type="radio" name="question6" value="30"/>
+      <label>Greater than 30</label><br />
+      <input type="radio" name="question6" value="40"/>
+      <label>Greater than 40</label><br />
+    </div>
+    <br />
+    <div id="question7">
+      <h4>6) Drivetrain</h4>
+      <input type="radio" name="question7" value="F"/>
+      <label>Forward wheel drive</label><br />
+      <input type="radio" name="question7" value="R"/>
+      <label>Rear wheel drive</label><br />
+      <input type="radio" name="question7" value="A"/>
+      <label>All wheel drive</label><br />        
+    </div>
+    <br />
+
+    <div class="col-sm-6 controls" style="margin: 0% 45%">                                       
+      <input class="color green styled-button-1" type="submit" value="Submit"> 
+    </div>
+
+
+  </form>
 </div>
 </div>
+</div>
+

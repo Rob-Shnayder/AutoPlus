@@ -22,7 +22,7 @@ body {
 /* Slidebar begin */
 .slidebar {
   width: 20%;
-  min-height: 850px;
+  min-height: 950px;
   float: left;
   border-right: 1px solid rgb(235,235,235);
   background-color: rgb(247,247,247);
@@ -83,7 +83,7 @@ body {
 .main {
   float: left;
   width: 79%;
-  height: 90%;
+  height: 1050px;
   background-color: rgb(255,255,255);
   position: relative;
   font-family: helvetica, verdana, sans-serif;
@@ -127,8 +127,6 @@ body {
 .mainContent h4 {
   line-height: 1;
   font-size: 18px;
-  margin: 1.3em 0 1em;
-  margin-left: 17px;
 }
 
 .mainContent > div {
