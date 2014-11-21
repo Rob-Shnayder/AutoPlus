@@ -11,18 +11,27 @@ $engineCylinder = $_POST['question5'];
 $MPG = $_POST['question6'];
 $DriveTrain = $_POST['question7'];
 
+
+
 //require_once('php-console/src/PhpConsole/__autoload.php');
 
 // Call debug from PhpConsole\Handler
 //$handler = PhpConsole\Handler::getInstance();
 //$handler->start();
+/*
+echo $vehicleType;
+echo $region;
+echo $transmission;
+echo $engineCylinder;
+echo $MPG;
+echo $DriveTrain;
 
-
+*/
 ?>
 
-<div class="container" style = "margin-top: 3%;">	
+<div class="container" style = "margin-top: 2%;">	
 	<div class="row clearfix">		
-	<div class ="main" style="height:2000px">
+	<div class ="col-md-12 column well" style="height:2000px">
 		<h1>Results</h1>
 		<a href="Dashboard.php#dashboard"><id="brand">Back To Dashboard</a>
 		<hr>
@@ -32,18 +41,20 @@ $DriveTrain = $_POST['question7'];
 						<tr>
 							<th>Manufacture</th>
 							<th>Model</th>
-							<th>Model</th>
+							<th>Engine</th>
 							<th>Cylinders</th>
 							<th>Tranmission</th>
 							<th>City MPG</th>
 							<th>Highway MPG</th>
 							<th>Combined MPG</th>
 							<th>Annual Fuel Cost</th>
+							<th>Edmunds Link</th>
 						</tr>
 						<?php
-						$Query1="call CarQuiz('$vehicleType', '$region', '$transmission', '$engineCylinder', '$DriveTrain', '$MPG')";
+						$Query1="call CarQuiz('$vehicleType', '$region', '$transmission', '$engineCylinder', '$MPG', '$DriveTrain')";
 						$res = $con->query("$Query1");
 						$count=0;
+						$baseEdmandsLink = "http://www.edmunds.com/";
 						while($row = mysqli_fetch_array($res))
 						{	
 							
@@ -64,7 +75,15 @@ $DriveTrain = $_POST['question7'];
 							  echo "</td><td>";
 							  echo $row['combinedFE'];
 							  echo "</td><td>";   
-							  echo $row['AnnualFuelCost'];
+							  echo "$" . $row['AnnualFuelCost'];
+							  echo "</td><td>";   
+							  $webAddress = explode(' ', trim($row['model']));
+							  $fullLink = $baseEdmandsLink . $row['make'] . "/" . $webAddress[0] . "/";
+							  $fullLink_Lower = strtolower($fullLink);
+							  //echo $fullLink;
+							  echo "<a href=\"$fullLink_Lower\"  target=\"_blank\">Edmunds Link</a>";
+
+
 							  echo "</td>"; 
 
 

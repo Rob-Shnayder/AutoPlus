@@ -46,10 +46,10 @@ body {
     
 }
 .pricing-table {
-    width: 150%;
+    width: 180%;
     margin: 60px auto;
     text-align: center;
-    padding: 10px;
+    
     padding-right: 0;
 }
 .pricing-table .heading{

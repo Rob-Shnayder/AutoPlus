@@ -17,11 +17,11 @@
                 <div class="col-lg-12">
                     <div class="intro-message">
                         <h1>Auto+</h1>
-                        <h3>Innovative Automotive Management.</h3>
+                        <h4>Innovative Automotive Management.</h4>
                         <hr class="intro-divider">
                         <?php 
 
-                        echo "<ul class\"list-inline intro-social-buttons\">";
+                        echo "<ul class\"list-inline intro-social-buttons\" style=\"margin-right: 3%;\">";
                         if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true) 
                         {                            
                             echo "<a href=\"dashboard.php#dashboard\" class=\"btn btn-default btn-lg\"><span class=\"network-name\">Dashboard</span></a>";   
@@ -46,7 +46,10 @@
                 <div class="col-lg-5 col-sm-6">
                     <hr class="section-heading-spacer">
                     <div class="clearfix"></div>
-                    <h2  class="section-heading">Re-think how you manage automotive dealerships.</h2>                    
+                    <h2  class="section-heading">Automotive Inventory made easy.</h2>   
+                    <h4  class="section-heading">- One Step Setup</h4>   
+                    <h4  class="section-heading">- Inventory Management</h4>    
+                    <h4  class="section-heading">- Client Management</h4>                 
                 </div>
                 <div class="col-lg-5 col-lg-offset-2 col-sm-6">
                     <img class="img-responsive" src="img/ipad.png" alt="">
