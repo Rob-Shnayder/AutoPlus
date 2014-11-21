@@ -31,12 +31,18 @@ function drawRow(rowData) {
     row.append($("<td>" + rowData.Make + "</td>"));
     row.append($("<td>" + rowData.Model + "</td>"));
     row.append($("<td>" + rowData.VIN + "</td>"));
-    row.append($("<td>" + rowData.Year + "</td>"));
+    row.append($("<td>" + rowData.Year + "</td>")); 
     row.append($("<td>" + rowData.Color + "</td>"));
     row.append($("<td><button id=" + rowData.VIN + " onclick=\"UpdateRecord(this.id)\" class=\"btn btn-primary btn-xs\"><span class=\"glyphicon glyphicon-pencil\"></span></button></td>"));
+    row.append($("<td><button id=" + rowData.CarID + " onclick=\"DeleteRecord(this.id)\" class=\"btn btn-danger btn-xs\"><span class=\"glyphicon glyphicon-trash\"></span></button></td>"));
   }        
 
 function UpdateRecord(clicked_id)
 {
     window.location.replace("UpdateInventory_Form.php?VIN=" + clicked_id);
+}
+
+function DeleteRecord(clicked_id)
+{
+    window.location.replace("UserManagement/DeleteCar.php?CarID=" + clicked_id);
 }

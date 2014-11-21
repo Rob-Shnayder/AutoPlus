@@ -72,7 +72,7 @@
         </div> 
 
         <div class="panel-body" >
-            <form accept-charset="UTF-8" id="signupform" class="form-horizontal" role="form" method="post" action="UserManagement/registr.php" >
+            <form accept-charset="UTF-8" id="signupform" class="form-horizontal" role="form" method="post" action="UserManagement/register.php" >
 
                 <div id="signupalert" style="display:none" class="alert alert-danger">
                     <p>Error:</p>
@@ -129,10 +129,9 @@
         </div>
     </div>
 </div> 
-</div>
 
 
 
 </div>
-</div> 
+</div>
 </div>
