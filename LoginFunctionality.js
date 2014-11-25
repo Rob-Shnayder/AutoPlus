@@ -8,7 +8,8 @@ jQuery(document).ready(function(){
 
              if(!username || !password)
              {
-                document.getElementById('login-alert').style.display = 'none';
+                document.getElementById('login-alert').style.display = 'block';
+                document.getElementById('login-alert').innerHTML = "Please enter a username and password.";
              }
 
           $.ajax({
@@ -27,7 +28,8 @@ jQuery(document).ready(function(){
             {
               if(!username || !password)
              {
-                document.getElementById('login-alert').style.display = 'none';
+                document.getElementById('login-alert').style.display = 'block';
+                document.getElementById('login-alert').innerHTML = "Please enter a username and password.";
              }       
              else
              {

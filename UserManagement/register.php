@@ -21,7 +21,7 @@ if($res)
     $_SESSION['firstname'] = $firstname;
 
    mysql_close($con);
-   header( 'Location: ../Dashboard.php');
+   header( 'Location: ../Dashboard.php#dashboard');
 }
 else
 {

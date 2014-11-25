@@ -20,7 +20,7 @@ function showhide(id){
 <div class="admin-panel clearfix">
   <div class="slidebar">
     <div class="logo">
-
+      
     </div>
     <ul>
       <li><a name="dashboard" onclick="showhide('dashboard')" href="#dashboard">dashboard</a></li>
@@ -63,7 +63,7 @@ function showhide(id){
       </div>
 
       <div id="Settings" class="contentso" style="display:none;">     
-        <h1>Account Management</h1>
+        <?php include ('Forms/ChangePassword.html'); ?>
       </div>
 
     </div>

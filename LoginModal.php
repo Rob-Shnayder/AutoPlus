@@ -3,47 +3,38 @@
 
 
 <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="purchaseLabel" aria-hidden="true">       
-    <div class="modal-body center" style="margin-left: 18%; width: 70%; position: relative; top:5%">                
-            <div id="loginbox" style="margin-top:50px;" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">                    
+    <div class="modal-body center" style="margin-left: 12%; width: 70%; position: relative; top:5%">                
 
-                <div class="panel" >
-                    <div class="panel-heading">
-                        <h3>Login</h3>                        
-                    </div>     
+        <div id="loginbox" style="margin-top:50px;" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">   
+            <div class="panel" >
 
-                    <div class="panel-body" >
-                      <div style="display:none" id="login-alert" class="alert alert-danger col-sm-12"></div>
+                <div class="panel-heading">
+                    <h3>Login</h3>                        
+                </div>     
 
-                      <form id="loginform" class="form-horizontal" role="form" method="post" action="./" parsley-validate>
+                <div class="panel-body" > 
+                  <form id="loginform" class="form-horizontal" role="form" method="post" action="./" parsley-validate>
+                    <div style="display:none" id="login-alert" class="alert alert-danger col-sm-12"></div>
 
-                        <div style="margin-bottom: 25px" class="input-group">
-                            <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                            <input id="login-username" type="text" class="form-control" name="username" value="" placeholder="Username ">                                        
-                        </div>
+                    
 
-                        <div style="margin-bottom: 25px" class="input-group">
-                            <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
-                            <input id="login-password" type="password" class="form-control" name="password" placeholder="Password">
-                        </div>
+                    <div style="margin-bottom: 25px" class="input-group">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                        <input id="login-username" type="text" class="form-control" name="username" parsley-required="true" parsley-minlength="4" value="" placeholder="Username ">                                        
+                    </div>
 
+                    <div style="margin-bottom: 25px" class="input-group">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+                        <input id="login-password" type="password" class="form-control" name="password" parsley-required="true" parsley-minlength="4" placeholder="Password">
+                    </div>
 
-
-                        <div class="input-group">
-                            <div class="checkbox">
-                                <label>
-                                  <input id="login-remember" type="checkbox" name="remember" value="1"> Remember me
-                              </label>
-                          </div>
-                      </div>
-
-
-                      <div style="margin-top:10px" class="form-group">
-                         <div class="col-md-offset-3 col-md-9">
+                    <div style="margin-top:10px" class="form-group">
+                       <div class="col-md-offset-3 col-md-9">
                           <input class="color green styled-button-1" type="submit" value="Login" id="login"> 
                           <div class="divider"></div>
                           <button type="button" class="nav styled-button-1" data-dismiss="modal">Cancel</button>                          
-                         </div>
-                     </div>
+                      </div>
+                  </div>
 
 
                   <div class="form-group">
@@ -57,10 +48,13 @@
                     </div>
                 </div>    
 
-        </div>      
-    </form>                  
-    </div>  
-</div>
+
+            </form>
+        </div> 
+    </div>                 
+</div>  
+
+
 
 
 <div id="signupbox" style="display:none; margin-top:50px" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
@@ -72,7 +66,7 @@
         </div> 
 
         <div class="panel-body" >
-            <form accept-charset="UTF-8" id="signupform" class="form-horizontal" role="form" method="post" action="UserManagement/register.php" >
+            <form accept-charset="UTF-8" id="signupform" class="form-horizontal" role="form" method="post" action="UserManagement/register.php" parsley-validate>
 
                 <div id="signupalert" style="display:none" class="alert alert-danger">
                     <p>Error:</p>
@@ -84,37 +78,37 @@
                 <div class="form-group">
                     <label for="username" class="col-md-3 control-label">Username</label>
                     <div class="col-md-9">
-                        <input type="text" class="form-control" name="username" id="username" placeholder="Username">
-                         <div id="error">
-                                </div>
+                        <input type="text" class="form-control" name="username" parsley-required="true" parsley-minlength="5" id="username" placeholder="Username">
+                        <div id="error">
+                        </div>
                     </div>
                 </div>
 
                 <div class="form-group">
                     <label for="password" class="col-md-3 control-label">Password</label>
                     <div class="col-md-9">
-                        <input type="password" class="form-control" name="password" placeholder="Password">
+                        <input type="password" class="form-control" name="password" parsley-required="true" parsley-minlength="6" placeholder="Password">
                     </div>
                 </div>
 
                 <div class="form-group">
                     <label for="firstname" class="col-md-3 control-label">First Name</label>
                     <div class="col-md-9">
-                        <input type="text" class="form-control" name="firstname" placeholder="First Name">
+                        <input type="text" class="form-control" name="firstname" parsley-required="true"  placeholder="First Name">
                     </div>
                 </div>
 
                 <div class="form-group">
                     <label for="lastname" class="col-md-3 control-label">Last Name</label>
                     <div class="col-md-9">
-                        <input type="text" class="form-control" name="lastname" placeholder="Last Name">
+                        <input type="text" class="form-control" name="lastname" parsley-required="true" placeholder="Last Name">
                     </div>
                 </div>
 
                 <div class="form-group">
                     <label for="email" class="col-md-3 control-label">Email</label>
                     <div class="col-md-9">
-                        <input type="text" class="form-control" name="email" placeholder="Email Address">
+                        <input type="email" class="form-control" name="email" parsley-required="true" placeholder="Email Address">
                     </div>
                 </div> 
 
@@ -131,7 +125,5 @@
 </div> 
 
 
-
-</div>
 </div>
 </div>
